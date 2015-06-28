@@ -18,17 +18,18 @@
 	</div>
 	<div id="login">
 		<div id="triangle"></div>
-		<h1>Login</h1>
+		<h1>Register</h1>
 		<div class="form-panel">
-			<input type="email" placeholder="Email" />
-			<input type="password" placeholder="Password" />
-			<input type="button" value="Login" />
+			<input id="txt-name" type="text" placeholder="Name" />
+			<input id="txt-email" type="email" placeholder="Email" />
+			<input id="txt-password" type="password" placeholder="Password" />
+			<input type="button" value="Register" onclick="register()"/>
 			<div class="display-right">
-				<a href="register.html">Register</a>
+				<a href="index.html">Back to Login</a>
 			</div>
 		</div>
 	</div>
-	<div id="dialog" title="Basic dialog">
+	<div id="dialog" title="Basic dialog" style="display: none;">
 		<p id="dialog-content"></p>
 	</div>
 </body>

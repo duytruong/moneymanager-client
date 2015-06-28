@@ -28,3 +28,30 @@ function showDialog(dialogTitle, dialogContent) {
 		}
 	});
 }
+
+function login() {
+	
+	var email = $("#txt-email").val();
+	var password = $("#txt-password").val();
+	
+	$.ajax( {
+        cache: false,
+        crossDomain: true,
+        dataType: JSON_DATA_TYPE,
+        url: WS_URL.LOGIN_URL,
+        type: REQUEST.POST,
+        data: {
+            "username": email,
+            "password": password
+        },
+        success: function( jsonObj, textStatus, xhr ) {
+            sessionStorage.auth_token = jsonObj.auth_token;
+            window.location.replace("http://localhost:8080/moneymanager-client/payment.html");
+        },
+        error: function( xhr, textStatus, errorThrown ) {
+            console.log( "HTTP Status: " + xhr.status );
+            console.log( "Error textStatus: " + textStatus );
+            console.log( "Error thrown: " + errorThrown );
+        }
+    } );
+}

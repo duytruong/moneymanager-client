@@ -11,7 +11,8 @@ function register() {
         type: REQUEST.POST,
         data: JSON.stringify(userData),
         success: function(data) {
-        	showDialog("Money Manager", "Your account has been created.")
+        	//showDialog("Money Manager", "Your account has been created.")
+        	login();
         },
         error: function(error) {
         	console.log(error);
@@ -33,6 +34,9 @@ function login() {
 	
 	var email = $("#txt-email").val();
 	var password = $("#txt-password").val();
+	
+	console.log(email);
+	console.log(password);
 	
 	$.ajax( {
         cache: false,

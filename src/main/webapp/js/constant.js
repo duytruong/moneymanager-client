@@ -1,5 +1,11 @@
 var HOST_NAME = '//localhost:8080/moneymanager';
 
+var CLIENT_HOST_NAME = 'http://localhost:8080/moneymanager-client';
+
+var PAGE = {
+	PAYMENT: '/payment.html'	
+};
+
 var WS_URL = {
 		LOGIN_URL: HOST_NAME + '/rest/auth/login',
 		LOGOUT_URL: HOST_NAME + '/rest/auth/logout',

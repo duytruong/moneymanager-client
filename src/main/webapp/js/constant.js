@@ -9,7 +9,8 @@ var PAGE = {
 var WS_URL = {
 		LOGIN_URL: HOST_NAME + '/rest/auth/login',
 		LOGOUT_URL: HOST_NAME + '/rest/auth/logout',
-		REGISTER_URL: HOST_NAME + '/rest/user/register'
+		REGISTER_URL: HOST_NAME + '/rest/user/register',
+		LOAD_PAYMENT: HOST_NAME + ''
 };
 
 var JSON_CONTENT_TYPE = "application/json";

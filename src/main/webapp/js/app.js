@@ -59,3 +59,7 @@ function login() {
         }
     } );
 }
+
+function loadPayment() {
+	
+}

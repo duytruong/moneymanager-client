@@ -1,0 +1,28 @@
+body {
+  background:#678;
+  font-family:'Open Sans',sans-serif;
+}
+
+#payment-table {
+	background:#f0f0f0;
+	padding:20px 30px;
+	width: 80%;
+}
+
+.display-center {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.display-right {
+	float: right;
+}
+
+td {
+	text-align: center;
+}
+
+.align-left {
+	text-align: left;
+}

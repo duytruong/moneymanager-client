@@ -60,6 +60,73 @@ function login() {
     } );
 }
 
-function loadPayment() {
+function logout() {
+	$.ajax( {
+        cache: false,
+        crossDomain: true,
+        headers: {
+        	"auth_token": sessionStorage.auth_token
+        },
+        url: WS_URL.LOGOUT_URL,
+        type: REQUEST.POST,
+        success: function( jsonObj, textStatus, xhr ) {
+            window.location.replace("http://localhost:8080/moneymanager-client");
+        },
+        error: function( xhr, textStatus, errorThrown ) {
+            console.log( "HTTP Status: " + xhr.status );
+            console.log( "Error textStatus: " + textStatus );
+            console.log( "Error thrown: " + errorThrown );
+        }
+    } );
+}
+
+function getUserId() {
+	$.ajax({
+	    url: WS_URL.GET_USER_ID,
+	    type: REQUEST.POST,
+	    data: {
+	    	"auth_token": sessionStorage.auth_token
+	    },
+	    dataType: JSON_DATA_TYPE,
+	    crossDomain: true,
+	    success: function(data) {
+	    	console.log(data);
+	    	loadPayment(data);
+	    },
+	    error:function(msg){
+	    	console.log(msg);
+	    }
+	});
+}
+
+function loadPayment(userId) {
+	$.ajax({
+	    url: WS_URL.GET_PAYMENT,
+	    type: REQUEST.POST,
+	    data: {
+	    	"userid": userId
+	    },
+	    dataType: JSON_DATA_TYPE,
+	    contentType: JSON_CONTENT_TYPE,
+	    crossDomain: true,
+	    success: function(data) {
+	    	var paymentTable = $("#payment-table");
+	    	paymentTable.find("tbody tr").remove().end();
+	    	for (var i = 0; i < data.length; i++) {
+	    		var rowStr = '<tr>' + 
+	    			'<td>' + data[i].getName() + '</td>' +
+	    			'<td>' + data[i].getDate() + '</td>' +
+	    			'<td>' + data[i].getPrice() + '</td>' + '</tr>';
+	    		
+	    		paymentTable.append(rowStr);
+	    	}
+	    },
+	    error:function(msg){
+	    	console.log(msg);
+	    }
+	});
+}
+
+function addPayment() {
 	
 }

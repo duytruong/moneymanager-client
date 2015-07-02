@@ -12,6 +12,7 @@ function register() {
         data: JSON.stringify(userData),
         success: function(data) {
         	//showDialog("Money Manager", "Your account has been created.")
+        	sessionStorage.clear();
         	login();
         },
         error: function(error) {
@@ -39,7 +40,6 @@ function login() {
 	console.log(password);
 	
 	$.ajax( {
-        cache: false,
         crossDomain: true,
         dataType: JSON_DATA_TYPE,
         url: WS_URL.LOGIN_URL,
@@ -62,7 +62,6 @@ function login() {
 
 function logout() {
 	$.ajax( {
-        cache: false,
         crossDomain: true,
         headers: {
         	"auth_token": sessionStorage.auth_token
@@ -70,6 +69,7 @@ function logout() {
         url: WS_URL.LOGOUT_URL,
         type: REQUEST.POST,
         success: function( jsonObj, textStatus, xhr ) {
+        	sessionStorage.clear();
             window.location.replace("http://localhost:8080/moneymanager-client");
         },
         error: function( xhr, textStatus, errorThrown ) {
@@ -90,8 +90,8 @@ function getUserId() {
 	    dataType: JSON_DATA_TYPE,
 	    crossDomain: true,
 	    success: function(data) {
-	    	console.log(data);
-	    	loadPayment(data);
+	    	console.log(data.user_id);
+	    	loadPayment(data.user_id);
 	    },
 	    error:function(msg){
 	    	console.log(msg);
@@ -107,7 +107,6 @@ function loadPayment(userId) {
 	    	"userid": userId
 	    },
 	    dataType: JSON_DATA_TYPE,
-	    contentType: JSON_CONTENT_TYPE,
 	    crossDomain: true,
 	    success: function(data) {
 	    	var paymentTable = $("#payment-table");

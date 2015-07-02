@@ -90,8 +90,8 @@ function getUserId() {
 	    dataType: JSON_DATA_TYPE,
 	    crossDomain: true,
 	    success: function(data) {
-	    	console.log(data.user_id);
-	    	loadPayment(data.user_id);
+	    	console.log(data.userid);
+	    	loadPayment(data.userid);
 	    },
 	    error:function(msg){
 	    	console.log(msg);

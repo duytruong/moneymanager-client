@@ -23,6 +23,22 @@ td {
 	text-align: center;
 }
 
-.align-left {
-	text-align: left;
+.align-right {
+	text-align: right;
+}
+
+#header-panel {
+	display: inline-block;
+}
+
+input[type="button"] {
+  background:#3399cc;
+  border:0;
+  padding:10%;
+  font-family:'Open Sans',sans-serif;
+  font-size:100%;
+  color:#fff;
+  cursor:pointer;
+  transition:background .3s;
+  -webkit-transition:background .3s;
 }

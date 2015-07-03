@@ -87,10 +87,13 @@ function getUserId() {
 	    data: {
 	    	"auth_token": sessionStorage.auth_token
 	    },
+	    headers: {
+	    	"auth_token": sessionStorage.auth_token
+	    },
 	    dataType: JSON_DATA_TYPE,
 	    crossDomain: true,
 	    success: function(data) {
-	    	console.log(data.userid);
+	    	$("#name-area").text("Hello " + data.name);
 	    	loadPayment(data.userid);
 	    },
 	    error:function(msg){
@@ -104,11 +107,15 @@ function loadPayment(userId) {
 	    url: WS_URL.GET_PAYMENT,
 	    type: REQUEST.POST,
 	    data: {
-	    	"userid": userId
+	    	"userid": userId,
+	    },
+	    headers: {
+	    	"auth_token": sessionStorage.auth_token
 	    },
 	    dataType: JSON_DATA_TYPE,
 	    crossDomain: true,
 	    success: function(data) {
+	    	var sumOfPayments = 0;
 	    	var paymentTable = $("#payment-table");
 	    	paymentTable.find("tbody tr").remove().end();
 	    	for (var i = 0; i < data.length; i++) {
@@ -118,7 +125,9 @@ function loadPayment(userId) {
 	    			'<td>' + data[i].price + '</td>' + '</tr>';
 	    		
 	    		paymentTable.append(rowStr);
+	    		sumOfPayments += data[i].price;
 	    	}
+	    	$("#sum-of-payment").text("Sum: " + sumOfPayments);
 	    },
 	    error:function(msg){
 	    	console.log(msg);

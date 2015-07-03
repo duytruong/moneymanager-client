@@ -14,27 +14,30 @@
 	<script src="js/payment.js"></script>
 </head>
 <body>
+	<div id="header-panel" class="display-right">
+		<div id="name-area"></div>
+		<input type="button" value="Logout" onclick="logout()"/>
+	</div>
 	<div>
 		<table id="payment-table" class="display-center">
 			<thead>
 				<tr>
-					<th>Tên chi tiêu</th>
-					<th>Ngày chi tiêu</th>
-					<th>Số tiền</th>
+					<th>Payment name</th>
+					<th>Date</th>
+					<th>Price</th>
 				</tr>
 			</thead>
 			<tfoot>
 				<tr>
 					<td></td>
 					<td></td>
-					<td id="sum-of-payment" class="align-left">Tổng:</td>
+					<td id="sum-of-payment" class="align-right"></td>
 				</tr>
 			</tfoot>
 			<tbody>
 			</tbody>
 		</table>
 	</div>
-	<input type="button" value="Logout" onclick="logout()"/>
 	<div id="dialog" title="Basic dialog">
 		<p id="dialog-content"></p>
 	</div>

@@ -33,6 +33,26 @@ function showDialog(dialogTitle, dialogContent) {
 	});
 }
 
+function showConfirmDialog(dialogTitle, dialogContent) {
+	$("#confirm-dialog-content").html(dialogContent);
+	
+	$("#confirm-dialog").dialog({
+		title: dialogTitle,
+		resizable : false,
+		modal : true,
+		buttons : {
+			OK : function() {
+				doAddPayment();
+				$(this).dialog("close");
+			},
+			Cancel : function() {
+				$("#txt-payment-price").val("");
+				$(this).dialog("close");
+			}
+		}
+	});
+}
+
 function login() {
 	
 	var email = $("#txt-email").val();
@@ -56,6 +76,7 @@ function login() {
         },
         error: function( xhr, textStatus, errorThrown ) {
         	showDialog("Money Manager", "Login failed! Please check your email and password!");
+        	resetLoginForm();
             console.log( "HTTP Status: " + xhr.status );
             console.log( "Error textStatus: " + textStatus );
             console.log( "Error thrown: " + errorThrown );
@@ -139,7 +160,7 @@ function loadPayment(userId) {
 	});
 }
 
-function addPayment() {
+function doAddPayment() {
 	var paymentData = new Object();
 	paymentData.name = $("#txt-payment-name").val();
 	paymentData.date = $("#txt-payment-date").val();
@@ -161,12 +182,42 @@ function addPayment() {
         data: JSON.stringify(paymentData),
         success: function(data) {
         	showDialog("Money Manager", "Your payment is added.");
-        	loadPayment(userID);
+        	resetAddPaymentForm();
+        	loadPayment(userID); //reload
         },
         error: function(error) {
         	showDialog("Money Manager", "Sorry! Cannot add payment.");
         	console.log(error);
         }
     });
+}
+
+function addPayment() {
+	var price = $("#txt-payment-price").val();
 	
+	if (isPriceGreaterThanTenMil(price)) {
+		showConfirmDialog("Add Payment", "Price is greater than 10 000 000. Do you want to add?");
+	} else {
+		doAddPayment();
+	}
+}
+
+function isPriceGreaterThanTenMil(price) {
+//	if (price > MAX_PRICE) {
+//		return true;
+//	} else {
+//		return false;
+//	}
+	return (price > MAX_PRICE ? true : false);
+}
+
+function resetAddPaymentForm() {
+	$("#txt-payment-name").val("");
+	$("#txt-payment-date").val("");
+	$("#txt-payment-price").val("");
+}
+
+function resetLoginForm() {
+	$("#txt-email").val("");
+	$("#txt-password").val("");
 }

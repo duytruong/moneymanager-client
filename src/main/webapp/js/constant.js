@@ -23,3 +23,5 @@ var REQUEST = {
 		POST: "POST",
 		GET: "GET"
 };
+
+var MAX_PRICE = 10000000;

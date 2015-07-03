@@ -113,9 +113,9 @@ function loadPayment(userId) {
 	    	paymentTable.find("tbody tr").remove().end();
 	    	for (var i = 0; i < data.length; i++) {
 	    		var rowStr = '<tr>' + 
-	    			'<td>' + data[i].getName() + '</td>' +
-	    			'<td>' + data[i].getDate() + '</td>' +
-	    			'<td>' + data[i].getPrice() + '</td>' + '</tr>';
+	    			'<td>' + data[i].name + '</td>' +
+	    			'<td>' + data[i].date + '</td>' +
+	    			'<td>' + data[i].price + '</td>' + '</tr>';
 	    		
 	    		paymentTable.append(rowStr);
 	    	}

@@ -9,6 +9,11 @@ body {
 	width: 80%;
 }
 
+#add-payment-form {
+	background:#f0f0f0;
+	width: 400px;
+}
+
 .display-center {
 	display: block;
 	margin-left: auto;
@@ -41,4 +46,20 @@ input[type="button"] {
   cursor:pointer;
   transition:background .3s;
   -webkit-transition:background .3s;
+}
+
+.button-normal {
+	padding: 4% !important;
+	width:100%;
+}
+
+input[type="text"]{
+  width:100%;
+  background:#fff;
+  margin-bottom:4%;
+  border:1px solid #ccc;
+  padding:4%;
+  font-family:'Open Sans',sans-serif;
+  font-size:95%;
+  color:#555;
 }

@@ -1,3 +1,5 @@
+var userID = undefined;
+
 function register() {
 	
 	var userData = new Object();
@@ -53,6 +55,7 @@ function login() {
             window.location.replace("http://localhost:8080/moneymanager-client/payment.html");
         },
         error: function( xhr, textStatus, errorThrown ) {
+        	showDialog("Money Manager", "Login failed! Please check your email and password!");
             console.log( "HTTP Status: " + xhr.status );
             console.log( "Error textStatus: " + textStatus );
             console.log( "Error thrown: " + errorThrown );
@@ -94,6 +97,7 @@ function getUserId() {
 	    crossDomain: true,
 	    success: function(data) {
 	    	$("#name-area").text("Hello " + data.name);
+	    	userID = data.userid;
 	    	loadPayment(data.userid);
 	    },
 	    error:function(msg){
@@ -136,5 +140,33 @@ function loadPayment(userId) {
 }
 
 function addPayment() {
+	var paymentData = new Object();
+	paymentData.name = $("#txt-payment-name").val();
+	paymentData.date = $("#txt-payment-date").val();
+	paymentData.price = $("#txt-payment-price").val();
+	if (userID != undefined) {
+		var owner = new Object();
+		owner.id = userID;
+		paymentData.user = owner;
+	}
+	
+	$.ajax({
+        url: WS_URL.ADD_PAYMENT,
+        contentType: JSON_CONTENT_TYPE,
+        dataType: JSON_DATA_TYPE,
+        type: REQUEST.POST,
+        headers: {
+	    	"auth_token": sessionStorage.auth_token
+	    },
+        data: JSON.stringify(paymentData),
+        success: function(data) {
+        	showDialog("Money Manager", "Your payment is added.");
+        	loadPayment(userID);
+        },
+        error: function(error) {
+        	showDialog("Money Manager", "Sorry! Cannot add payment.");
+        	console.log(error);
+        }
+    });
 	
 }

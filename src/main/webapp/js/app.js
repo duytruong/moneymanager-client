@@ -13,11 +13,11 @@ function register() {
         type: REQUEST.POST,
         data: JSON.stringify(userData),
         success: function(data) {
-        	//showDialog("Money Manager", "Your account has been created.")
         	sessionStorage.clear();
         	login();
         },
         error: function(error) {
+        	showDialog("Money Manager", "Someone already has that email. Try another?");
         	console.log(error);
         }
     });
@@ -57,9 +57,6 @@ function login() {
 	
 	var email = $("#txt-email").val();
 	var password = $("#txt-password").val();
-	
-	console.log(email);
-	console.log(password);
 	
 	$.ajax( {
         crossDomain: true,
@@ -122,7 +119,7 @@ function getUserId() {
 	    	loadPayment(data.userid);
 	    },
 	    error:function(msg){
-	    	console.log(msg);
+	    	window.location.replace("http://localhost:8080/moneymanager-client");
 	    }
 	});
 }
